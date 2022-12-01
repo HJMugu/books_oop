@@ -4,11 +4,30 @@ const ls = new LS()
 
 //elemendid
 const form = document.querySelector('form');
+const booksList = document.querySelector('#book-list');
 
 
 //events
 form.addEventListener('submit', addBook);
 document.addEventListener('DOMContentLoaded', getBooks);
+booksList.addEventListener('click', delBook);
+
+function delBook(event){
+
+    if(event.target.textContent === 'X'){
+        const book = new Book()
+        book.title = event.target.parentElement.parentElement.firstChild.nextSibling.textContent
+        book.author = event.target.parentElement.parentElement.firstChild.nextSibling.nextSibling.textContent
+        book.isbn = event.target.parentElement.parentElement.firstChild.nextSibling.nextSibling.nextSibling.textContent
+
+        console.log(book)
+        ui.delBook(book)
+
+        ls.delBook(book)
+
+
+    }
+}
 
 function getBooks(){
     let books = ls.getData('books')
